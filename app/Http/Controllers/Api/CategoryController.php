@@ -11,7 +11,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::paginate(10);
+        $categories = Category::paginate(5);
         return response()->json($categories, 200);
     }
 
@@ -44,10 +44,11 @@ class CategoryController extends Controller
     {
         $category = Category::findOrFail($id);
         $category->delete();
-
-        return response()->json(null, 204);
+    
+        $data = ['message' => 'Category deleted successfully'];
+        return response()->json($data, 200);
     }
-
+    
     public function products($id)
     {
         $category = Category::findOrFail($id);
